@@ -23,11 +23,13 @@ class LCPViewController: UIViewController {
     }
 
     func hasNonNumerics(string: String) -> Bool {
-        return false
+        let validCharacters: Set<Character> = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " ", "\n"]
+        // Check if any other character present.
+        return !Set(string.characters).isSubset(of: validCharacters)
     }
     
     func isEmptyString(string: String) -> Bool {
-        return false
+        return string.isEmpty
     }
     
     func validateRowSize(input: String) -> Bool {
