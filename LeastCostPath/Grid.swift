@@ -9,6 +9,11 @@
 import Foundation
 
 class MatrixFactory {
+    class func getMatrix(rowCount: Int, colCount: Int) -> [[Int]] {
+        let matrix = [[Int]](repeating: [Int](repeating: 0, count: colCount), count: rowCount)
+        return matrix
+    }
+
     class func getMatrix(inputString: String, rowCount: Int, colCount: Int) -> [[Int]] {
         var matrix = [[Int]](repeating: [Int](repeating: 0, count: colCount), count: rowCount)
         let rows = Utility.getRows(inputString: inputString)
@@ -31,6 +36,13 @@ struct Grid {
         return matrix[i][j]
     }
     
+    // Initialize an empty grid.
+    init? (rows: Int, columns: Int) {
+        rowCount = rows
+        colCount = columns
+        matrix = MatrixFactory.getMatrix(rowCount: rowCount, colCount: colCount)
+    }
+    
     // Initialize a Grid with valid input string.
     init?(inputString: String) {
         guard Utility.isValidInput(input: inputString) else {
@@ -41,4 +53,19 @@ struct Grid {
         colCount = Utility.getColumnCount(inputString: inputString)
         matrix = MatrixFactory.getMatrix(inputString: inputString, rowCount: rowCount, colCount: colCount)
     }
+    
+    func validateIndex(row: Int, column: Int) -> Bool {
+        return row >= 0 && row < rowCount && column >= 0 && column < colCount
+    }
+    
+    subscript(row: Int, column: Int) -> Int {
+        get {
+            assert(validateIndex(row: row, column: column), "Index out of range")
+            return matrix[row][column]
+        }
+        set {
+            assert(validateIndex(row: row, column: column), "Index out of range")
+            matrix[row][column] = newValue
+        }
+    }    
 }

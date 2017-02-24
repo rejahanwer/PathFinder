@@ -11,6 +11,7 @@ import XCTest
 
 class LCPManagerTests: XCTestCase {
     
+    let testCase0 = "1 2 3 4 5 6\n2 2 3 4 5 6\n3 2 3 4 5 6\n1 2 3 4 5 6\n3 2 3 4 5 6"
     let testCase1 = "3 4 1 2 8 6\n6 1 8 2 7 4\n5 9 3 9 9 5\n8 4 1 3 2 6\n3 7 2 8 6 4"
     let testCase2 = "3 4 1 2 8 6\n6 1 8 2 7 4\n5 9 3 9 9 5\n8 4 1 3 2 6\n3 7 2 1 2 3"
     let testCase3_noPath = "19 10 19 10 19\n21 23 20 19 12\n20 12 20 11 10"
@@ -36,9 +37,41 @@ class LCPManagerTests: XCTestCase {
     }
     
     func testGetLowestCostPath1() {
-        let result = manager.getLowestCostPath(inputString: testCase1)
+        let result = manager.computeMinCosts(inputString: testCase1)
         XCTAssertEqual(result.result, .yes)
         XCTAssertEqual(result.cost, 16)
         XCTAssertEqual(result.path, [1, 2, 3, 4, 4,  5])
     }
+    
+    /*
+    func testGetValidLeftValues() {
+        let grid = Grid(inputString: testCase0)
+        if let grid = grid {
+            let result1 = manager.getValidLeftIndices(grid: grid, i: 0, j: 0)
+            let result2 = manager.getValidLeftIndices(grid: grid, i: 0, j: 1)
+            let result3 = manager.getValidLeftIndices(grid: grid, i: 1, j: 1)
+            let result4 = manager.getValidLeftIndices(grid: grid, i: 4, j: 1)
+            
+            // Result 1 - All nil
+            XCTAssertNil(result1.validLeft1)
+            XCTAssertNil(result1.validLeft2)
+            XCTAssertNil(result1.validLeft3)
+            
+            // Result2 - Wrapped values
+            XCTAssertEqual(result2.validLeft1!, (i:0, j: 0))
+            XCTAssertEqual(result2.validLeft2!, (i:4, j: 0))
+            XCTAssertEqual(result2.validLeft3!, (i:1, j: 0))
+
+            // Result3 - Normal values
+            XCTAssertEqual(result3.validLeft1, (i: 1, j: 0))
+            XCTAssertEqual(result3.validLeft2, (i: 0, j: 0))
+            XCTAssertEqual(result3.validLeft3, (i: 2, j: 0))
+            
+            // Result4 - Wrapped upwards
+            XCTAssertEqual(result4.validLeft1, (i: 4, j: 0))
+            XCTAssertEqual(result4.validLeft2, (i: 3, j: 0))
+            XCTAssertEqual(result4.validLeft3, (i: 0, j: 0))
+        }
+    }
+    */
 }
