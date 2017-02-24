@@ -17,6 +17,7 @@ class LCPInputTests: XCTestCase {
     let inputString4 = "\n"
 
     var viewController: LCPViewController!
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -28,27 +29,19 @@ class LCPInputTests: XCTestCase {
         super.tearDown()
     }
     
-    func testEmptyInput() {
-        let emptyString = ""
-        let nonEmptyString = "1"
-        
-        XCTAssertTrue(viewController.isEmptyString(string: emptyString))
-        XCTAssertFalse(viewController.isEmptyString(string: nonEmptyString))
-    }
-    
     func testNonNumericInput() {
         let nonNumericString = "a b c\n"
         let numericString = "1 2 3\n"
         
-        XCTAssertTrue(viewController.hasNonNumerics(string: nonNumericString))
-        XCTAssertFalse(viewController.hasNonNumerics(string: numericString))
+        XCTAssertTrue(nonNumericString.hasNonNumerics)
+        XCTAssertFalse(numericString.hasNonNumerics)
     }
     
     func testGetRows() {
-        let rows1 = viewController.getRows(inputString: inputString1)
-        let rows2 = viewController.getRows(inputString: inputString2)
-        let rows3 = viewController.getRows(inputString: emptyString)
-        let rows4 = viewController.getRows(inputString: inputString4)
+        let rows1 = Utility.getRows(inputString: inputString1)
+        let rows2 = Utility.getRows(inputString: inputString2)
+        let rows3 = Utility.getRows(inputString: emptyString)
+        let rows4 = Utility.getRows(inputString: inputString4)
         
         XCTAssertEqual(rows1, ["1 2 3 4 5", "1 2 3 4 5", "1 2 3 4 5", "1 2 3 4 5", "1 2 3 4 5"])
         XCTAssertEqual(rows2, ["1 2 3 4 5", "1 2 3 4 5", "1 2 3 4 5", "1 2 3 4 5", "1 2 3 4 5"])
@@ -57,22 +50,22 @@ class LCPInputTests: XCTestCase {
     }
     
     func testGetColumns() {
-        let rows1 = viewController.getRows(inputString: inputString1)
-        let cols1 = viewController.getColumns(inputString: rows1.first!)
+        let rows1 = Utility.getRows(inputString: inputString1)
+        let cols1 = Utility.getColumns(inputString: rows1.first!)
         
         XCTAssertEqual(cols1, ["1", "2", "3", "4", "5"])
         
         
-        let cols2 = viewController.getColumns(inputString: emptyString)
+        let cols2 = Utility.getColumns(inputString: emptyString)
         XCTAssertEqual(cols2, [])
     }
     
     func testGetRowsCount() {
         
-        let rowsCount1 = viewController.getRowsCount(inputString: inputString1)
-        let rowsCount2 = viewController.getRowsCount(inputString: inputString2)
-        let rowsCount3 = viewController.getRowsCount(inputString: emptyString)
-        let rowsCount4 = viewController.getRowsCount(inputString: inputString4)
+        let rowsCount1 = Utility.getRowsCount(inputString: inputString1)
+        let rowsCount2 = Utility.getRowsCount(inputString: inputString2)
+        let rowsCount3 = Utility.getRowsCount(inputString: emptyString)
+        let rowsCount4 = Utility.getRowsCount(inputString: inputString4)
         
         XCTAssertEqual(rowsCount1, 5)
         XCTAssertEqual(rowsCount2, 5)
@@ -81,10 +74,10 @@ class LCPInputTests: XCTestCase {
     }
     
     func testGetColumnCount() {
-        let colCount1 = viewController.getRowsCount(inputString: inputString1)
-        let colCount2 = viewController.getRowsCount(inputString: inputString2)
-        let colCount3 = viewController.getRowsCount(inputString: emptyString)
-        let colCount4 = viewController.getRowsCount(inputString: inputString4)
+        let colCount1 = Utility.getRowsCount(inputString: inputString1)
+        let colCount2 = Utility.getRowsCount(inputString: inputString2)
+        let colCount3 = Utility.getRowsCount(inputString: emptyString)
+        let colCount4 = Utility.getRowsCount(inputString: inputString4)
         
         XCTAssertEqual(colCount1, 5)
         XCTAssertEqual(colCount2, 5)
@@ -103,10 +96,10 @@ class LCPInputTests: XCTestCase {
         // 11 Rows
         let invalidInput2 = "1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n 1 2 3 4 5"
         
-        XCTAssertTrue(viewController.validateRowSize(input: validInput1))
-        XCTAssertTrue(viewController.validateRowSize(input: validInput2))
-        XCTAssertFalse(viewController.validateRowSize(input: invalidInput1))
-        XCTAssertFalse(viewController.validateRowSize(input: invalidInput2))
+        XCTAssertTrue(Utility.validateRowSize(input: validInput1))
+        XCTAssertTrue(Utility.validateRowSize(input: validInput2))
+        XCTAssertFalse(Utility.validateRowSize(input: invalidInput1))
+        XCTAssertFalse(Utility.validateRowSize(input: invalidInput2))
     }
 
     // Test if columns between 5 - 100.
@@ -119,10 +112,10 @@ class LCPInputTests: XCTestCase {
         let invalidInput1 = "1 2 3 4"
         let invalidInput2 = "1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 101"
         
-        XCTAssertTrue(viewController.validateColumnSize(input: validInput1))
-        XCTAssertTrue(viewController.validateColumnSize(input: validInput2))
-        XCTAssertFalse(viewController.validateColumnSize(input: invalidInput1))
-        XCTAssertFalse(viewController.validateColumnSize(input: invalidInput2))
+        XCTAssertTrue(Utility.validateColumnSize(input: validInput1))
+        XCTAssertTrue(Utility.validateColumnSize(input: validInput2))
+        XCTAssertFalse(Utility.validateColumnSize(input: invalidInput1))
+        XCTAssertFalse(Utility.validateColumnSize(input: invalidInput2))
     }
     
     // Given a string input, tests if in the right format.
@@ -132,9 +125,9 @@ class LCPInputTests: XCTestCase {
         let invalidInput1 = emptyString
         let invalidInput2 = inputString4
         
-        XCTAssertTrue(viewController.isValidInput(input: validInput1))
-        XCTAssertTrue(viewController.isValidInput(input: validInput2))
-        XCTAssertFalse(viewController.isValidInput(input: invalidInput1))
-        XCTAssertFalse(viewController.isValidInput(input: invalidInput2))
+        XCTAssertTrue(Utility.isValidInput(input: validInput1))
+        XCTAssertTrue(Utility.isValidInput(input: validInput2))
+        XCTAssertFalse(Utility.isValidInput(input: invalidInput1))
+        XCTAssertFalse(Utility.isValidInput(input: invalidInput2))
     }
 }
