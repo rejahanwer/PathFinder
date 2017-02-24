@@ -9,7 +9,7 @@
 import XCTest
 @testable import LeastCostPath
 
-class LeastCostPathInputTests: XCTestCase {
+class LCPInputTests: XCTestCase {
 
     let inputString1 = "1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5"
     let inputString2 = "1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n"
