@@ -12,6 +12,11 @@ import XCTest
 
 class LeastCostPathTests: XCTestCase {
 
+    let inputString1 = "1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5"
+    let inputString2 = "1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n"
+    let emptyString = ""
+    let inputString4 = "\n"
+
     var viewController: LCPViewController!
     override func setUp() {
         super.setUp()
@@ -40,15 +45,34 @@ class LeastCostPathTests: XCTestCase {
         XCTAssertFalse(viewController.hasNonNumerics(string: numericString))
     }
     
+    func testGetRows() {
+        let rows1 = viewController.getRows(inputString: inputString1)
+        let rows2 = viewController.getRows(inputString: inputString2)
+        let rows3 = viewController.getRows(inputString: emptyString)
+        let rows4 = viewController.getRows(inputString: inputString4)
+        
+        XCTAssertEqual(rows1, ["1 2 3 4 5", "1 2 3 4 5", "1 2 3 4 5", "1 2 3 4 5", "1 2 3 4 5"])
+        XCTAssertEqual(rows2, ["1 2 3 4 5", "1 2 3 4 5", "1 2 3 4 5", "1 2 3 4 5", "1 2 3 4 5"])
+        XCTAssertEqual(rows3, [])
+        XCTAssertEqual(rows4, [])
+    }
+    
+    func testGetColumns() {
+        let rows1 = viewController.getRows(inputString: inputString1)
+        let cols1 = viewController.getColumns(inputString: rows1.first!)
+        
+        XCTAssertEqual(cols1, ["1", "2", "3", "4", "5"])
+        
+        
+        let cols2 = viewController.getColumns(inputString: emptyString)
+        XCTAssertEqual(cols2, [])
+    }
+    
     func testRowsCount() {
-        let inputString1 = "1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5"
-        let inputString2 = "1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n"
-        let inputString3 = ""
-        let inputString4 = "\n"
         
         let rowsCount1 = viewController.getRowsCount(inputString: inputString1)
         let rowsCount2 = viewController.getRowsCount(inputString: inputString2)
-        let rowsCount3 = viewController.getRowsCount(inputString: inputString3)
+        let rowsCount3 = viewController.getRowsCount(inputString: emptyString)
         let rowsCount4 = viewController.getRowsCount(inputString: inputString4)
         
         XCTAssertEqual(rowsCount1, 5)

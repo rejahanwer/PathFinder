@@ -46,12 +46,12 @@ class LCPViewController: UIViewController {
     }
     
     // Retreive rows count from the input string
-    func getRowsCount(inputString: String) -> Int {
+    func getRows(inputString: String) -> [String] {
         var tempString = inputString
         
         // Return 0 for empty string.
         guard !(tempString.isEmpty || tempString == "\n") else {
-            return 0
+            return []
         }
         
         // Handle only "\n" or strings that end with "\n"
@@ -60,14 +60,27 @@ class LCPViewController: UIViewController {
         }
         
         let rows = tempString.components(separatedBy: "\n")
+        return rows
+    }
+    
+    func getColumns(inputString: String) -> [String] {
+        guard !(inputString.isEmpty) else {
+            return []
+        }
+
+        let columns = inputString.components(separatedBy: " ")
+        return columns
+    }
+    
+    func getRowsCount(inputString: String) -> Int {
+        
+        let rows = getRows(inputString: inputString)
         return rows.count
     }
     
     func getColumnCount(inputString: String) -> Int {
-        let rows = inputString.components(separatedBy: "\n")
-        if let columns = rows.first?.components(separatedBy: " ") {
-            return columns.count
-        }
+        let rows = getRows(inputString: inputString)
+        let columns = getColumns(inputString: inputString)
         return 0
     }
 }
