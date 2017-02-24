@@ -17,6 +17,11 @@ let inputString1 = "1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5"
 let inputString2 = "1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n"
 let inputString3 = "\n"
 
+enum ResultString: String {
+    case yes = "Yes"
+    case no = "No"
+}
+
 class Utility {
     // Check if in valid format.
     class func isValidInput(input: String) -> Bool {
