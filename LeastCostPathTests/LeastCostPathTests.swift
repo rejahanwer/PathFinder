@@ -68,7 +68,7 @@ class LeastCostPathTests: XCTestCase {
         XCTAssertEqual(cols2, [])
     }
     
-    func testRowsCount() {
+    func testGetRowsCount() {
         
         let rowsCount1 = viewController.getRowsCount(inputString: inputString1)
         let rowsCount2 = viewController.getRowsCount(inputString: inputString2)
@@ -79,6 +79,18 @@ class LeastCostPathTests: XCTestCase {
         XCTAssertEqual(rowsCount2, 5)
         XCTAssertEqual(rowsCount3, 0)
         XCTAssertEqual(rowsCount4, 0)
+    }
+    
+    func testGetColumnCount() {
+        let colCount1 = viewController.getRowsCount(inputString: inputString1)
+        let colCount2 = viewController.getRowsCount(inputString: inputString2)
+        let colCount3 = viewController.getRowsCount(inputString: emptyString)
+        let colCount4 = viewController.getRowsCount(inputString: inputString4)
+        
+        XCTAssertEqual(colCount1, 5)
+        XCTAssertEqual(colCount2, 5)
+        XCTAssertEqual(colCount3, 0)
+        XCTAssertEqual(colCount4, 0)
     }
     
     // Test if rows between 1 - 10.

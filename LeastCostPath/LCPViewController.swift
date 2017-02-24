@@ -63,6 +63,7 @@ class LCPViewController: UIViewController {
         return rows
     }
     
+    // Return the columns in a row
     func getColumns(inputString: String) -> [String] {
         guard !(inputString.isEmpty) else {
             return []
@@ -72,15 +73,21 @@ class LCPViewController: UIViewController {
         return columns
     }
     
+    // Return number of rows in a matrix formatted string.
     func getRowsCount(inputString: String) -> Int {
         
         let rows = getRows(inputString: inputString)
         return rows.count
     }
     
+    // Return number of columns for the first row in a matrix formatted string.
     func getColumnCount(inputString: String) -> Int {
         let rows = getRows(inputString: inputString)
-        let columns = getColumns(inputString: inputString)
+        if let firstRow = rows.first {
+            let columns = getColumns(inputString: firstRow)
+            return columns.count
+        }
+        
         return 0
     }
 }
