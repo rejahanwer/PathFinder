@@ -20,11 +20,19 @@ class LCPViewController: UIViewController {
     
     // Check if in valid format.
     func isValidInput(input: String) -> Bool {
-        // Check if \n and spaces are correct.
-        // Check if all numeric values
-        //
+        guard !(input.isEmpty ||
+                input == "\n" ||
+                self.hasNonNumerics(string: input)) else {
+            print ("Invalid input")
+            return false
+        }
         
-        return false
+        guard (validateRowSize(input: input) && validateColumnSize(input: input)) else {
+            print ("Invalid grid size")
+            return false
+        }
+        
+        return true
     }
 
     func hasNonNumerics(string: String) -> Bool {

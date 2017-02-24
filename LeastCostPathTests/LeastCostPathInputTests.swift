@@ -9,8 +9,7 @@
 import XCTest
 @testable import LeastCostPath
 
-
-class LeastCostPathTests: XCTestCase {
+class LeastCostPathInputTests: XCTestCase {
 
     let inputString1 = "1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5"
     let inputString2 = "1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n"
@@ -128,10 +127,14 @@ class LeastCostPathTests: XCTestCase {
     
     // Given a string input, tests if in the right format.
     func testInputValidity() {
-        let validInput = "1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5"
-        let invalidInput = ""
+        let validInput1 = inputString1
+        let validInput2 = inputString2
+        let invalidInput1 = emptyString
+        let invalidInput2 = inputString4
         
-        XCTAssertTrue(viewController.isValidInput(input: validInput))
-        XCTAssertFalse(viewController.isValidInput(input: invalidInput))
+        XCTAssertTrue(viewController.isValidInput(input: validInput1))
+        XCTAssertTrue(viewController.isValidInput(input: validInput2))
+        XCTAssertFalse(viewController.isValidInput(input: invalidInput1))
+        XCTAssertFalse(viewController.isValidInput(input: invalidInput2))
     }
 }
