@@ -9,6 +9,11 @@
 import UIKit
 
 class LCPViewController: UIViewController {
+    let minRowCount = 1
+    let maxRowCount = 10
+    let minColumnCount = 5
+    let maxColumnCount = 100
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -33,10 +38,36 @@ class LCPViewController: UIViewController {
     }
     
     func validateRowSize(input: String) -> Bool {
-        return false
+        return minRowCount...maxRowCount ~= getRowsCount(inputString: input)
     }
     
     func validateColumnSize(input: String) -> Bool {
-        return false
+        return minColumnCount...maxColumnCount ~= getColumnCount(inputString: input)
+    }
+    
+    // Retreive rows count from the input string
+    func getRowsCount(inputString: String) -> Int {
+        var tempString = inputString
+        
+        // Return 0 for empty string.
+        guard !(tempString.isEmpty || tempString == "\n") else {
+            return 0
+        }
+        
+        // Handle only "\n" or strings that end with "\n"
+        if inputString.characters.last == "\n" {
+            tempString = inputString.substring(to: inputString.index(before: inputString.endIndex))
+        }
+        
+        let rows = tempString.components(separatedBy: "\n")
+        return rows.count
+    }
+    
+    func getColumnCount(inputString: String) -> Int {
+        let rows = inputString.components(separatedBy: "\n")
+        if let columns = rows.first?.components(separatedBy: " ") {
+            return columns.count
+        }
+        return 0
     }
 }
