@@ -12,6 +12,10 @@ let minRowCount = 1
 let maxRowCount = 10
 let minColumnCount = 5
 let maxColumnCount = 100
+let emptyString = ""
+let inputString1 = "1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5"
+let inputString2 = "1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n"
+let inputString3 = "\n"
 
 class Utility {
     // Check if in valid format.
@@ -76,13 +80,16 @@ class Utility {
     }
     
     // Return the columns in a row
-    class func getColumns(inputString: String) -> [String] {
+    class func getColumns(inputString: String) -> [Int] {
         guard !(inputString.isEmpty) else {
             return []
         }
         
         let columns = inputString.components(separatedBy: " ")
-        return columns
+        
+        // Trim and convert to int
+        let columnsInt = columns.map { Int($0.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))!}
+        print (columnsInt)
+        return columnsInt
     }
 }
-

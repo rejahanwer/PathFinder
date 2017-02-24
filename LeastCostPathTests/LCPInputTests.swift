@@ -10,12 +10,6 @@ import XCTest
 @testable import LeastCostPath
 
 class LCPInputTests: XCTestCase {
-
-    let inputString1 = "1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5"
-    let inputString2 = "1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n"
-    let emptyString = ""
-    let inputString4 = "\n"
-
     var viewController: LCPViewController!
     
     override func setUp() {
@@ -40,8 +34,9 @@ class LCPInputTests: XCTestCase {
     func testGetRows() {
         let rows1 = Utility.getRows(inputString: inputString1)
         let rows2 = Utility.getRows(inputString: inputString2)
-        let rows3 = Utility.getRows(inputString: emptyString)
-        let rows4 = Utility.getRows(inputString: inputString4)
+        let rows3 = Utility.getRows(inputString: inputString3)
+        let rows4 = Utility.getRows(inputString: emptyString)
+        
         
         XCTAssertEqual(rows1, ["1 2 3 4 5", "1 2 3 4 5", "1 2 3 4 5", "1 2 3 4 5", "1 2 3 4 5"])
         XCTAssertEqual(rows2, ["1 2 3 4 5", "1 2 3 4 5", "1 2 3 4 5", "1 2 3 4 5", "1 2 3 4 5"])
@@ -53,7 +48,7 @@ class LCPInputTests: XCTestCase {
         let rows1 = Utility.getRows(inputString: inputString1)
         let cols1 = Utility.getColumns(inputString: rows1.first!)
         
-        XCTAssertEqual(cols1, ["1", "2", "3", "4", "5"])
+        XCTAssertEqual(cols1, [1, 2, 3, 4, 5])
         
         
         let cols2 = Utility.getColumns(inputString: emptyString)
@@ -64,8 +59,8 @@ class LCPInputTests: XCTestCase {
         
         let rowsCount1 = Utility.getRowsCount(inputString: inputString1)
         let rowsCount2 = Utility.getRowsCount(inputString: inputString2)
-        let rowsCount3 = Utility.getRowsCount(inputString: emptyString)
-        let rowsCount4 = Utility.getRowsCount(inputString: inputString4)
+        let rowsCount3 = Utility.getRowsCount(inputString: inputString3)
+        let rowsCount4 = Utility.getRowsCount(inputString: emptyString)
         
         XCTAssertEqual(rowsCount1, 5)
         XCTAssertEqual(rowsCount2, 5)
@@ -76,8 +71,8 @@ class LCPInputTests: XCTestCase {
     func testGetColumnCount() {
         let colCount1 = Utility.getRowsCount(inputString: inputString1)
         let colCount2 = Utility.getRowsCount(inputString: inputString2)
-        let colCount3 = Utility.getRowsCount(inputString: emptyString)
-        let colCount4 = Utility.getRowsCount(inputString: inputString4)
+        let colCount3 = Utility.getRowsCount(inputString: inputString3)
+        let colCount4 = Utility.getRowsCount(inputString: emptyString)
         
         XCTAssertEqual(colCount1, 5)
         XCTAssertEqual(colCount2, 5)
@@ -123,7 +118,7 @@ class LCPInputTests: XCTestCase {
         let validInput1 = inputString1
         let validInput2 = inputString2
         let invalidInput1 = emptyString
-        let invalidInput2 = inputString4
+        let invalidInput2 = inputString3
         
         XCTAssertTrue(Utility.isValidInput(input: validInput1))
         XCTAssertTrue(Utility.isValidInput(input: validInput2))
