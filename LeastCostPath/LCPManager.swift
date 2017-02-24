@@ -21,7 +21,7 @@ class LCPManager {
         if let grid = Grid(inputString: inputString) {
         
             // Get LCP for grid.
-            let result = getLowestCostPath(grid: grid)
+            let result = computeMinCosts(grid: grid)
         }
         
         return (.no, 0, [])
@@ -66,7 +66,7 @@ class LCPManager {
         let minItem = minArray.first
         return minItem
     }
-        
+    
     // Function to get the valid previous rows.
     func getValidLeftItems(grid: Grid, i: Int, j: Int) -> [GridItem] //(validLeft1: GridItem?,
                                                                      //validLeft2: GridItem?,

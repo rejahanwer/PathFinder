@@ -37,7 +37,7 @@ class LCPManagerTests: XCTestCase {
     }
     
     func testGetLowestCostPath1() {
-        let result = manager.computeMinCosts(inputString: testCase1)
+        let result = manager.getLowestCostPath(inputString: testCase1)
         XCTAssertEqual(result.result, .yes)
         XCTAssertEqual(result.cost, 16)
         XCTAssertEqual(result.path, [1, 2, 3, 4, 4,  5])
