@@ -30,6 +30,15 @@ class MatrixFactory {
 struct Grid {
     let rowCount: Int
     let colCount: Int
+    
+    var lastRowIndex: Int {
+        return rowCount - 1
+    }
+    
+    var lastColIndex: Int {
+        return colCount - 1
+    }
+    
     var matrix: [[Int]]
     
     func valueAt(i: Int, j: Int) -> Int {
@@ -52,6 +61,11 @@ struct Grid {
         rowCount = Utility.getRowsCount(inputString: inputString)
         colCount = Utility.getColumnCount(inputString: inputString)
         matrix = MatrixFactory.getMatrix(inputString: inputString, rowCount: rowCount, colCount: colCount)
+    }
+    
+    // Retrieves last column of the grid as an array.
+    func getLastColumn() -> [Int] {
+        return matrix.map {$0.last!}
     }
     
     func validateIndex(row: Int, column: Int) -> Bool {
