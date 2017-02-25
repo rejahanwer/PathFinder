@@ -196,7 +196,7 @@ class LCPManager {
     }
     
     // Get minimum grid Item from an array.
-    private func minimumCost(items: [GridItem]) -> GridItem? {
+    func minimumCost(items: [GridItem]) -> GridItem? {
         
         // Handle 0 or 1 items.
         guard items.count > 0 else { return nil }
