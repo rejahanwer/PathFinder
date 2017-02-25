@@ -51,4 +51,12 @@ class LCPModelTests: XCTestCase {
         XCTAssertEqual(grid1!.valueAt(i: 3, j: 0), 1)
         XCTAssertEqual(grid1!.valueAt(i: 4, j: 0), 1)
     }
+    
+    func testGetLastColumn() {
+        let grid1 = Grid(inputString: inputString1)
+        let lastColArray = grid1?.getLastColumn()
+        
+        XCTAssertNotNil(lastColArray)
+        XCTAssertEqual(lastColArray!, [5, 5, 5, 5, 5])
+    }
 }
