@@ -23,6 +23,7 @@ class LCPViewController: UIViewController {
         if let inputString = inputTextView.text {
             let result = pathManager.getLowestCostPath(inputString: inputString)
             
+            // Initialize output strings.
             var output1 = ""
             var output2 = 0
             var output3: [Int] = []
@@ -38,13 +39,12 @@ class LCPViewController: UIViewController {
                 output1 = "Yes"
                 output2 = result.cost
                 output3 = result.path
-
                 outputTextView.text = "\(output1)\n\(output2)\n\(output3)"
+                
             case .no:
                 output1 = "No"
                 output2 = result.cost
                 output3 = result.path
-
                 outputTextView.text = "\(output1)\n\(output2)\n\(output3)"
             }
         }

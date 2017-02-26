@@ -2,7 +2,7 @@
 //  LCPManager.swift
 //  LeastCostPath
 //
-//  Created by Anuvar, Rejah (Contractor) on 2/24/17.
+//  Created by Anuvar, Rejah on 2/24/17.
 //  Copyright © 2017 rejah. All rights reserved.
 //
 
@@ -12,8 +12,6 @@ typealias LCPResult = (result: ResultString, cost: Int, path: [Int])
 typealias GridItem = (i: Int, j: Int, value: Int)
 
 class LCPManager {
-    
-    // var tempGrid: Grid! = nil
     
     func getLowestCostPath(inputString: String) -> LCPResult {
         var result: LCPResult = (.no, 0, [])
@@ -34,14 +32,15 @@ class LCPManager {
         return result
     }
     
-    // Computes minimum cost path for each item and updates in a temp Grid.
+    // Computes minimum cost path for each item and updates in a temporary cost Grid.
     private func computeMinCosts(grid: Grid) -> Grid? {
         // Temporary grid of same size
         var costGrid = Grid(rows: grid.rowCount, columns: grid.colCount)
         
         if costGrid != nil {
-            // Iterate through every Column, row wise.
+            // Iterate through every Column
             for j in 0 ..< grid.colCount {
+                // Iterate through every item, row wise.
                 for i in 0 ..< grid.rowCount {
                     // Update first column with same values as the grid.
                     if j == 0 {
@@ -49,8 +48,7 @@ class LCPManager {
                     }
                     else
                     {
-                        // Update temp grid with minCostPaths to reach each element.
-                        // let validLeftIndices = getValidLeftItems(grid: tempGrid, i: i, j: j)
+                        // Update cost grid with minCostPaths to reach each element.
                         if let minValue = getMinimumCostLeftItem(grid: costGrid!, i: i, j: j)?.value {
                             costGrid![i, j] = grid[i, j] + minValue
                         }
@@ -58,7 +56,7 @@ class LCPManager {
                 }
             }
             
-            print ("grid: ", grid)
+            print ("Grid: ", grid)
             print ("costGrid: ", costGrid!)
         }
         
@@ -66,7 +64,7 @@ class LCPManager {
     }
     
     // Function to get a valid or invalid path from a costGrid.
-    func getPath(costGrid: Grid) -> LCPResult {
+    private func getPath(costGrid: Grid) -> LCPResult {
         var cost: Int? = nil
         var pathArray = [Int]()
         var result: LCPResult = (.no, 0, [])
@@ -95,7 +93,7 @@ class LCPManager {
     }
     
     // Recursively backtracks the costGrid for a valid path.
-    func recursiveBacktrack(grid: Grid, i: Int, j: Int, path: inout [Int]) -> [Int] {
+    private func recursiveBacktrack(grid: Grid, i: Int, j: Int, path: inout [Int]) -> [Int] {
         // Insert visited item into the path.
         path.insert(i+1, at: 0)
         
@@ -117,7 +115,7 @@ class LCPManager {
     }
     
     // Recursively backtracks the costGrid for a failed path.
-    func recursiveBacktrackForFail(grid: Grid, i: Int, j: Int, cost: inout Int?, path: inout [Int]) -> (cost: Int?, path: [Int]) {
+    private func recursiveBacktrackForFail(grid: Grid, i: Int, j: Int, cost: inout Int?, path: inout [Int]) -> (cost: Int?, path: [Int]) {
         var result:(cost: Int?, path: [Int]) = (cost: nil, path: [])
         // Check if minCost is less than 50, set cost if yes.
         if grid[i, j] < 50 {
@@ -143,7 +141,7 @@ class LCPManager {
     }
 
     // For an item at i, j, function returns the minimum of all valid path items at left.
-    func getMinimumCostLeftItem(grid: Grid, i: Int, j: Int) -> GridItem? {
+    private func getMinimumCostLeftItem(grid: Grid, i: Int, j: Int) -> GridItem? {
         let validLeftIndices = getValidLeftItems(grid: grid, i: i, j: j)
         let minCostItem = minimumCost(items: validLeftIndices)
         return minCostItem
@@ -151,7 +149,7 @@ class LCPManager {
 
     // Function to get the valid path items in the previous column.
     // Returns 3 valid left items.
-    func getValidLeftItems(grid: Grid, i: Int, j: Int) -> [GridItem]
+    private func getValidLeftItems(grid: Grid, i: Int, j: Int) -> [GridItem]
     {
         // Invalid rowCounts or First column
         guard grid.rowCount > 0 && grid.colCount > 0 && j > 0 else {

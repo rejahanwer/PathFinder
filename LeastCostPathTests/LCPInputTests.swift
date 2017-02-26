@@ -2,7 +2,7 @@
 //  LeastCostPathTests.swift
 //  LeastCostPathTests
 //
-//  Created by Anuvar, Rejah (Contractor) on 2/23/17.
+//  Created by Anuvar, Rejah on 2/23/17.
 //  Copyright © 2017 rejah. All rights reserved.
 //
 

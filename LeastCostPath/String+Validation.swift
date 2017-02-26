@@ -2,7 +2,7 @@
 //  String+Validation.swift
 //  LeastCostPath
 //
-//  Created by Anuvar, Rejah (Contractor) on 2/24/17.
+//  Created by Anuvar, Rejah on 2/24/17.
 //  Copyright © 2017 rejah. All rights reserved.
 //
 

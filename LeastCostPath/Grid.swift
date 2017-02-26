@@ -68,6 +68,7 @@ struct Grid {
         return matrix.map {$0.last!}
     }
     
+    // Validate given row, column for a matrix.
     func validateIndex(row: Int, column: Int) -> Bool {
         return row >= 0 && row < rowCount && column >= 0 && column < colCount
     }
