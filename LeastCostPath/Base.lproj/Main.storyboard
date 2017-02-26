@@ -22,13 +22,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Lb5-y3-6Jr">
-                                <rect key="frame" x="16" y="47" width="343" height="426"/>
+                                <rect key="frame" x="16" y="47" width="343" height="280"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="280" id="FNr-oD-c9x"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQN-jJ-it8">
-                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <rect key="frame" x="16" y="335" width="343" height="50"/>
                                 <color key="backgroundColor" red="0.4431372549" green="0.6705882353" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="GXm-FJ-OaE"/>
@@ -41,13 +44,11 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="N61-Ib-XZe">
-                                <rect key="frame" x="16" y="489" width="343" height="112"/>
+                                <rect key="frame" x="16" y="393" width="343" height="68"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="112" id="mIs-Tc-vAa"/>
+                                    <constraint firstAttribute="height" constant="68" id="mIs-Tc-vAa"/>
                                 </constraints>
-                                <string key="text">Yes
-16 [1, 1, 1, 1, 1]</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -55,15 +56,14 @@
                         <color key="backgroundColor" red="0.69411764710000001" green="0.69411764710000001" blue="0.69411764710000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Lb5-y3-6Jr" secondAttribute="trailing" constant="16" id="3X8-yE-vqC"/>
-                            <constraint firstItem="N61-Ib-XZe" firstAttribute="top" secondItem="Lb5-y3-6Jr" secondAttribute="bottom" constant="16" id="4t7-eM-ASf"/>
-                            <constraint firstAttribute="trailing" secondItem="fQN-jJ-it8" secondAttribute="trailing" id="EZ8-di-Jcg"/>
+                            <constraint firstAttribute="trailing" secondItem="fQN-jJ-it8" secondAttribute="trailing" constant="16" id="EZ8-di-Jcg"/>
+                            <constraint firstItem="N61-Ib-XZe" firstAttribute="top" secondItem="fQN-jJ-it8" secondAttribute="bottom" constant="8" id="OO2-rk-Wrs"/>
                             <constraint firstItem="N61-Ib-XZe" firstAttribute="leading" secondItem="aUl-zv-9gI" secondAttribute="leading" constant="16" id="OgK-37-yCw"/>
                             <constraint firstAttribute="trailing" secondItem="N61-Ib-XZe" secondAttribute="trailing" constant="16" id="OwP-1j-Jmg"/>
-                            <constraint firstItem="i4B-Un-lzk" firstAttribute="top" secondItem="fQN-jJ-it8" secondAttribute="bottom" id="eLg-4L-cIX"/>
                             <constraint firstItem="Lb5-y3-6Jr" firstAttribute="leading" secondItem="aUl-zv-9gI" secondAttribute="leading" constant="16" id="fod-wm-Km3"/>
-                            <constraint firstItem="fQN-jJ-it8" firstAttribute="leading" secondItem="aUl-zv-9gI" secondAttribute="leading" id="jxT-X7-BtJ"/>
+                            <constraint firstItem="fQN-jJ-it8" firstAttribute="leading" secondItem="aUl-zv-9gI" secondAttribute="leading" constant="16" id="jxT-X7-BtJ"/>
+                            <constraint firstItem="fQN-jJ-it8" firstAttribute="top" secondItem="Lb5-y3-6Jr" secondAttribute="bottom" constant="8" id="kjS-wj-CtG"/>
                             <constraint firstItem="Lb5-y3-6Jr" firstAttribute="top" secondItem="2Sh-WB-l1l" secondAttribute="bottom" constant="27" id="oFJ-t5-Xdi"/>
-                            <constraint firstItem="fQN-jJ-it8" firstAttribute="top" secondItem="N61-Ib-XZe" secondAttribute="bottom" constant="16" id="ooZ-rn-CgG"/>
                         </constraints>
                     </view>
                     <connections>
