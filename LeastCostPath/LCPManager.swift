@@ -76,7 +76,6 @@ class LCPManager {
             let rowNo = lastColumn.index(of: minItem) {
             if minItem <= 50 {
                 // Valid path exists -> Recursively backtrack to get the min cost path.
-                print ("Row no: ", rowNo)
                 let path = recursiveBacktrack(grid: costGrid, i: rowNo, j: costGrid.lastColIndex, path: &pathArray)
                 result = (.yes, minItem, path)
             }
@@ -100,17 +99,14 @@ class LCPManager {
         // Exit condition from recursive function
         // For first column, return the path array.
         if j == 0 {
-            print ("Returning path: ", path)
             return path
         }
 
         // Recursively backtrack the min cost path.
         if let minCostleftItem = getMinimumCostLeftItem(grid: grid, i: i, j: j) {
-            print ("Rentering recursion")
             path = recursiveBacktrack(grid: grid, i: minCostleftItem.i, j: minCostleftItem.j, path: &path)
         }
         
-        print ("Returning path: ", path)
         return path
     }
     
