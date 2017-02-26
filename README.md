@@ -32,7 +32,7 @@ Given a grid of rows between 1-10 and columns between 5-100,
 the algorithm populates a temporary grid of same size with minimum costs for each grid item. 
 By doing this, we avoid repeated computation of cost for the same element which happens in simple dynamic programmed recursion.
 
-After this, the algorithm backtracks from the least cost item in the last column to find the path.
+After this, the algorithm backtracks from the least cost item in the last column of the costGrid to find the path.
 
 If no item exist in the last column with cost <= 50, then there is no valid path in the grid.
 
