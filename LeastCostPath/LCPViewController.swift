@@ -33,6 +33,7 @@ class LCPViewController: UIViewController {
                 output2 = result.cost
                 output3 = result.path
                 outputTextView.text = "\(output1)"
+                showInvalidInputAlert()
             case .yes:
                 output1 = "Yes"
                 output2 = result.cost
@@ -47,5 +48,12 @@ class LCPViewController: UIViewController {
                 outputTextView.text = "\(output1)\n\(output2)\n\(output3)"
             }
         }
+    }
+    
+    func showInvalidInputAlert() {
+        // Create and show alert
+        let alert = UIAlertController(title: "Invalid input", message: "Please enter the grid with columns(5-100) seperated by space and rows(1-10) seperated by new line", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
