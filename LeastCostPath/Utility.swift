@@ -20,6 +20,7 @@ let inputString3 = "\n"
 enum ResultString: String {
     case yes = "Yes"
     case no = "No"
+    case invalid = "Invalid"
 }
 
 class Utility {
@@ -90,11 +91,13 @@ class Utility {
             return []
         }
         
-        let columns = inputString.components(separatedBy: " ")
+        var columns = inputString.components(separatedBy: " ")
         
-        // Trim and convert to int
+        // Remove empty spaces if any entered in error.
+        columns = columns.filter {$0 != "" && $0 != " "}
+        
+        // Convert to Ints.
         let columnsInt = columns.map { Int($0.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))!}
-        print (columnsInt)
         return columnsInt
     }
 }

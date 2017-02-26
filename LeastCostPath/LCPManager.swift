@@ -16,46 +16,50 @@ class LCPManager {
     // var tempGrid: Grid! = nil
     
     func getLowestCostPath(inputString: String) -> LCPResult {
+        var result: LCPResult = (.no, 0, [])
         // Get grid from input string.
         if let grid = Grid(inputString: inputString) {
-        
+            
             // Get costGrid for the grid.
             if let costGrid = computeMinCosts(grid: grid) {
                 // Get the lowest cost path from the cost grid.
-                let result = getPath(costGrid: costGrid)
-                return result
+                result = getPath(costGrid: costGrid)
             }
         }
+        else {
+            // Grid not set if input is invalid.
+            result.result = .invalid
+        }
         
-        return (.no, 0, [])
+        return result
     }
     
     // Computes minimum cost path for each item and updates in a temp Grid.
     private func computeMinCosts(grid: Grid) -> Grid? {
         // Temporary grid of same size
-        let costGrid = Grid(rows: grid.rowCount, columns: grid.colCount)
+        var costGrid = Grid(rows: grid.rowCount, columns: grid.colCount)
         
-        if var costGrid = costGrid {
+        if costGrid != nil {
             // Iterate through every Column, row wise.
             for j in 0 ..< grid.colCount {
                 for i in 0 ..< grid.rowCount {
                     // Update first column with same values as the grid.
                     if j == 0 {
-                        costGrid[i, j] = grid[i, j]
+                        costGrid![i, j] = grid[i, j]
                     }
                     else
                     {
                         // Update temp grid with minCostPaths to reach each element.
                         // let validLeftIndices = getValidLeftItems(grid: tempGrid, i: i, j: j)
-                        if let minValue = getMinimumCostLeftItem(grid: costGrid, i: i, j: j)?.value {
-                            costGrid[i, j] = grid[i, j] + minValue
+                        if let minValue = getMinimumCostLeftItem(grid: costGrid!, i: i, j: j)?.value {
+                            costGrid![i, j] = grid[i, j] + minValue
                         }
                     }
                 }
             }
             
             print ("grid: ", grid)
-            print ("costGrid: ", costGrid)
+            print ("costGrid: ", costGrid!)
         }
         
         return costGrid
@@ -63,51 +67,58 @@ class LCPManager {
     
     // Function to get a valid or invalid path from a costGrid.
     func getPath(costGrid: Grid) -> LCPResult {
+        var cost: Int? = nil
+        var pathArray = [Int]()
+        var result: LCPResult = (.no, 0, [])
+        
+        // Get the minCost item from last column of costGrid.
         let lastColumn = costGrid.getLastColumn()
         let minItem = lastColumn.min()
-        var pathArray = [Int]()
-        var cost: Int? = nil
         if let minItem = minItem,
             let rowNo = lastColumn.index(of: minItem) {
             if minItem <= 50 {
-                // Valid path exists.
+                // Valid path exists -> Recursively backtrack to get the min cost path.
+                print ("Row no: ", rowNo)
                 let path = recursiveBacktrack(grid: costGrid, i: rowNo, j: costGrid.lastColIndex, path: &pathArray)
-                return (.yes, minItem, path)
+                result = (.yes, minItem, path)
             }
             else {
-                // Valid path does nt exist
+                // Valid path does nt exist -> Recursively backtrack to get the point of failure.
                 let failResult = recursiveBacktrackForFail(grid: costGrid, i: rowNo, j: costGrid.lastColIndex, cost: &cost, path: &pathArray)
                 
                 // Return cost if not nil, else 0.
-                return (.no, failResult.cost ?? 0, failResult.path)
+                result = (.no, failResult.cost ?? 0, failResult.path)
             }
         }
         
-        return (.no, 0, [])
+        return result
     }
     
     // Recursively backtracks the costGrid for a valid path.
     func recursiveBacktrack(grid: Grid, i: Int, j: Int, path: inout [Int]) -> [Int] {
-        // Exit condition from recursive function
+        // Insert visited item into the path.
         path.insert(i+1, at: 0)
         
+        // Exit condition from recursive function
         // For first column, return the path array.
         if j == 0 {
+            print ("Returning path: ", path)
             return path
         }
 
         // Recursively backtrack the min cost path.
         if let minCostleftItem = getMinimumCostLeftItem(grid: grid, i: i, j: j) {
+            print ("Rentering recursion")
             path = recursiveBacktrack(grid: grid, i: minCostleftItem.i, j: minCostleftItem.j, path: &path)
-            return path
         }
         
-        return []
+        print ("Returning path: ", path)
+        return path
     }
     
     // Recursively backtracks the costGrid for a failed path.
     func recursiveBacktrackForFail(grid: Grid, i: Int, j: Int, cost: inout Int?, path: inout [Int]) -> (cost: Int?, path: [Int]) {
-        
+        var result:(cost: Int?, path: [Int]) = (cost: nil, path: [])
         // Check if minCost is less than 50, set cost if yes.
         if grid[i, j] < 50 {
             // If cost is not set yet
@@ -125,11 +136,10 @@ class LCPManager {
         
         // Backtrack.
         if let minCostLeftItem = getMinimumCostLeftItem(grid: grid, i: i, j: j) {
-            let result = recursiveBacktrackForFail(grid: grid, i: minCostLeftItem.i, j: minCostLeftItem.j, cost: &cost, path: &path)
-            return (cost: result.cost, path: result.path)
+            result = recursiveBacktrackForFail(grid: grid, i: minCostLeftItem.i, j: minCostLeftItem.j, cost: &cost, path: &path)
         }
         
-        return (cost: nil, path: [])
+        return result
     }
 
     // For an item at i, j, function returns the minimum of all valid path items at left.
